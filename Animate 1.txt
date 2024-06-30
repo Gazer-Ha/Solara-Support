@@ -1,1 +1,854 @@
-local v0="None";local v1="None";local v2="None";local v3="None";local v4="None";local v5="None";local v6="None";local v7="None";local v8=game:GetService("HttpService");local v9=game:GetService("Players");local v10=v9.LocalPlayer;local v11=v10.Character;local v12=v11.Animate;local function v13() local v44=game.Players.LocalPlayer;local v45=v44.Character or v44.CharacterAdded:Wait() ;local v46=v45:WaitForChild("Humanoid");while v46.Health<=2  do task.wait(0.2);end end local function v14() local v47=game.Players.LocalPlayer;local v48=v47.Character or v47.CharacterAdded:Wait() ;local v49=v48:WaitForChild("Humanoid");while (v49:GetState()==Enum.HumanoidStateType.Dead) or (v49:GetState()==Enum.HumanoidStateType.Ragdoll)  do wait(0.1);end end local v15={};local function v16() local v50=v9.LocalPlayer;local v51=v50.Character;local v52=v51:FindFirstChildOfClass("Humanoid") or v51:FindFirstChildOfClass("AnimationController") ;for v160,v161 in next,v52:GetPlayingAnimationTracks() do v161:Stop();end end local function v17() local v53=game.Players.LocalPlayer;local v54=v53.Character or v53.CharacterAdded:Wait() ;local v55=v54:WaitForChild("Humanoid");v55:ChangeState(Enum.HumanoidStateType.Landed);end local function v18() local v56=game.Players.LocalPlayer;local v57=v56.Character or v56.CharacterAdded:Wait() ;local v58=v57:WaitForChild("Humanoid");v58:ChangeState(Enum.HumanoidStateType.Landed);task.wait(0.1);v58:ChangeState(Enum.HumanoidStateType.Swimming);end local function v19() local v59=game.Players.LocalPlayer;local v60=v59.Character or v59.CharacterAdded:Wait() ;local v61=v60:WaitForChild("Humanoid");v61:ChangeState(Enum.HumanoidStateType.Landed);task.wait(0.1);v61:ChangeState(Enum.HumanoidStateType.Climbing);end local v20={Idle={Astronaut={"891621366","891633237"},Bold={"16738333868","16738334710"},Borock={"3293641938","3293642554"},Bubbly={"910004836","910009958"},Cartoony={"742637544","742638445"},Confident={"1069977950","1069987858"},Cowboy={"1014390418","1014398616"},DrollingZombie={"3489171152","3489171152"},Elder={"10921101664","10921102574"},Ghost={"616006778","616008087"},Knight={"657595757","657568135"},Levitation={"616006778","616008087"},Mage={"707742142","707855907"},MrToilet={"4417977954","4417978624"},Ninja={"656117400","656118341"},OldSchool={"10921230744","10921232093"},Patrol={"1149612882","1150842221"},Pirate={"750781874","750782770"},Popstar={"1212900985","1150842221"},Princess={"941003647","941013098"},R6={"12521158637","12521162526"},R15Reanimated={"4211217646","4211218409"},Realistic={"17172918855","17173014241"},Robot={"616088211","616089559"},Sneaky={"1132473842","1132477671"},Stylish={"616136790","616138447"},StylizedFemale={"4708191566","4708192150"},Superhero={"616111295","616113536"},Toy={"782841498","782845736"},Udzal={"3303162274","3303162549"},Vampire={"1083445855","1083450166"},Werewolf={"1083195517","1083214717"},Zombie={"616158929","616160636"}},Walk={The2016Anims="387947975",Astronaut="891667138",Bold="16738340646",Bubbly="910034870",Cartoony="742640026",Confident="1070017263",Cowboy="1014421541",DrollingZombie="3489173414",Elder="10921111375",Ghost="616013216",Knight="657552124",Levitation="616013216",Mage="707897309",Ninja="656121766",OldSchool="10921244891",Patrol="1151231493",Pirate="750785693",Popstar="1212980338",Princess="941028902",R6="12518152696",R15Reanim="4211223236",Robot="616095330",Sneaky="1132510133",Stylish="616146177",StylizedFemale="4708193840",Superhero="6161222876",Toy="782843345",Udzal="3303162967",Vampire="1083473930",Werewolf="1083178339",Zombie="616168032"},Run={The2016Anims="387947975",Astronaut="10921039308",Bold="16738337225",Bubbly="10921057244",Cartoony="10921076136",Confident="1070001516",Cowboy="1014401683",DrollingZombie="3489173414",Elder="10921104374",Ghost="616013216",HeavyRun="3236836670",Knight="10921121197",Levitation="616010382",Mage="10921148209",MrToilet="4417979645",Ninja="656118852",OldSchool="10921240218",Patrol="1150967949",Pirate="750783738",Popstar="1212980348",Princess="941015281",R15Reanim="4211220381",R6="12518152696",Robot="10921250460",Sneaky="1132494274",Stylish="10921276116",StylizedFemale="4708192705",Superhero="10921291831",Toy="10921306285",Vampire="10921320299",Werewolf="10921336997",Zombie="616163682"},Jump={Astronaut="891627522",Bold="16738336650",Bubbly="910016857",Cartoony="742637942",Confident="1069984524",Cowboy="1014394726",Elder="10921107367",Ghost="616008936",Knight="910016857",Levitation="616008936",Mage="10921149743",Ninja="656117878",OldSchool="10921242013",Patrol="1148811837",Pirate="750782230",Popstar="1212954642",Princess="941008832",Robot="616090535",R15Reanim="4211219390",R6="12520880485",Sneaky="1132489853",Stylish="616139451",StylizedFemale="4708188025",Superhero="616115533",Toy="10921308158",Vampire="1083455352",Werewolf="1083218792"},Fall={Astronaut="891617961",Bold="16738333171",Bubbly="910001910",Cartoony="742637151",Confident="1069973677",Cowboy="1014384571",Elder="10921105765",Knight="657600338",Levitation="616005863",Mage="707829716",Ninja="656115606",OldSchool="10921241244",Patrol="1148863382",Pirate="750780242",Popstar="1212900995",Princess="941000007",Robot="616087089",R15Reanim="4211216152",R6="12520972571",Sneaky="1132469004",Stylish="616134815",StylizedFemale="4708186162",Superhero="616108001",Toy="782846423",Vampire="1083443587",Werewolf="1083189019"},SwimIdle={Astronaut="891663592",Bold="16738339817",Bubbly="910030921",Cartoony="10921079380",CowBoy="1014411816",Elder="10921110146",Mage="707894699",Ninja="656118341",Patrol="1151221899",Popstar="1212998578",R6="12518152696",Robot="10921253767",Sneaky="1132506407",Stylish="10921281964",Stylized="4708190607",Toy="10921310341"},Swim={Astronaut="891663592",Bubbly="910028158",Bubbly="910028158",Bold="16738339158",Cartoony="10921079380",Confident="1070009914",Elder="10921108971",Knight="10921125160",Mage="707876443",OldSchool="10921243048",R6="12518152696",Robot="10921253142",Stylish="10921281000",Toy="10921309319",Zombie="616165109"},Climb={The2016Anims="387946868",Bold="16738332169",Cartoony="742636889",Confident="1069946257",CowBoy="1014380606",Elder="845392038",Ghost="616003713",Knight="10921125160",Mage="707826056",Ninja="656114359",OldSchool="10921229866",Patrol="1148811837",Popstar="1213044953",Princess="940996062",R6="12520982150",Robot="616086039",Sneaky="1132461372",Stylish="10921271391",StylizedFemale="4708184253",SuperHero="616104706",Toy="10921300839",Vampire="1083439238",WereWolf="10921329322",Zombie="616156119"}};local function v21() local v62=v9.LocalPlayer;local v63=v62.Character;local v64=v63:FindFirstChildOfClass("Humanoid") or v63:FindFirstChildOfClass("AnimationController") ;for v162,v163 in next,v64:GetPlayingAnimationTracks() do v163:Stop();end local v65=v63.Animate;v65.idle.Animation1.AnimationId="http://www.roblox.com/asset/?id=0";v65.idle.Animation2.AnimationId="http://www.roblox.com/asset/?id=0";end local function v22() local v68=v9.LocalPlayer;local v69=v68.Character;local v70=v69:FindFirstChildOfClass("Humanoid") or v69:FindFirstChildOfClass("AnimationController") ;for v164,v165 in next,v70:GetPlayingAnimationTracks() do v165:Stop();end local v71=v69.Animate;v71.walk.WalkAnim.AnimationId="http://www.roblox.com/asset/?id=0";end local function v23() local v73=v9.LocalPlayer;local v74=v73.Character;local v75=v74:FindFirstChildOfClass("Humanoid") or v74:FindFirstChildOfClass("AnimationController") ;for v166,v167 in next,v75:GetPlayingAnimationTracks() do v167:Stop();end wait(0.1);local v76=v74.Animate;v76.run.RunAnim.AnimationId="http://www.roblox.com/asset/?id=0";end local function v24() local v78=v9.LocalPlayer;local v79=v78.Character;local v80=v79:FindFirstChildOfClass("Humanoid") or v79:FindFirstChildOfClass("AnimationController") ;for v168,v169 in next,v80:GetPlayingAnimationTracks() do v169:Stop();end wait(0.1);local v81=v79.Animate;v81.jump.JumpAnim.AnimationId="http://www.roblox.com/asset/?id=0";end local function v25() local v83=v9.LocalPlayer;local v84=v83.Character;local v85=v84:FindFirstChildOfClass("Humanoid") or v84:FindFirstChildOfClass("AnimationController") ;for v170,v171 in next,v85:GetPlayingAnimationTracks() do v171:Stop();end local v86=v84.Animate;v86.fall.FallAnim.AnimationId="http://www.roblox.com/asset/?id=0";end local function v26() local v88=v9.LocalPlayer;local v89=v88.Character;local v90=v89:FindFirstChildOfClass("Humanoid") or v89:FindFirstChildOfClass("AnimationController") ;for v172,v173 in next,v90:GetPlayingAnimationTracks() do v173:Stop();end local v91=v89.Animate;v91.swim.Swim.AnimationId="http://www.roblox.com/asset/?id=0";end local function v27() local v93=v9.LocalPlayer;local v94=v93.Character;local v95=v94:FindFirstChildOfClass("Humanoid") or v94:FindFirstChildOfClass("AnimationController") ;for v174,v175 in next,v95:GetPlayingAnimationTracks() do v175:Stop();end local v96=v94.Animate;v96.swimidle.SwimIdle.AnimationId="http://www.roblox.com/asset/?id=0";end local function v28() local v98=v9.LocalPlayer;local v99=v98.Character;local v100=v99:FindFirstChildOfClass("Humanoid") or v99:FindFirstChildOfClass("AnimationController") ;for v176,v177 in next,v100:GetPlayingAnimationTracks() do v177:Stop();end local v101=v99.Animate;v101.climb.ClimbAnim.AnimationId="http://www.roblox.com/asset/?id=0";end local function v29(v103) local v104=v9.LocalPlayer;local v105=v104.Character;local v106=v105:FindFirstChild("Animate");if  not v106 then return;end v15.Swim=v103;v26();v106.swim.Swim.AnimationId="http://www.roblox.com/asset/?id="   .. v103 ;v18();end local function v30(v109,v110) local v111=v9.LocalPlayer;local v112=v111.Character;local v113=v112:FindFirstChild("Animate");if  not v113 then return;end if (v109=="Idle") then v15.Idle=v110;v21();v113.idle.Animation1.AnimationId="http://www.roblox.com/asset/?id="   .. v110[1] ;v113.idle.Animation2.AnimationId="http://www.roblox.com/asset/?id="   .. v110[2] ;v17();elseif (v109=="Walk") then v15.Walk=v110;v22();v113.walk.WalkAnim.AnimationId="http://www.roblox.com/asset/?id="   .. v110 ;v17();elseif (v109=="Run") then v15.Run=v110;v23();v113.run.RunAnim.AnimationId="http://www.roblox.com/asset/?id="   .. v110 ;v17();elseif (v109=="Jump") then v15.Jump=v110;v24();v113.jump.JumpAnim.AnimationId="http://www.roblox.com/asset/?id="   .. v110 ;v17();elseif (v109=="Fall") then v15.Fall=v110;v25();v113.fall.FallAnim.AnimationId="http://www.roblox.com/asset/?id="   .. v110 ;v17();elseif (v109=="Swim") then v15.Swim=v110;v26();v113.swim.Swim.AnimationId="http://www.roblox.com/asset/?id="   .. v110 ;v18();elseif (v109=="SwimIdle") then v15.SwimIdle=v110;v27();v113.swimidle.SwimIdle.AnimationId="http://www.roblox.com/asset/?id="   .. v110 ;v18();elseif (v109=="Climb") then v15.Climb=v110;v28();v113.climb.ClimbAnim.AnimationId="http://www.roblox.com/asset/?id="   .. v110 ;v19();end end local function v31() v21();v22();v23();v24();v25();end local function v32(v114) v16();local v115=game:GetService("Players");local v116=v115.LocalPlayer;local v117=v116.Character or v116.CharacterAdded:Wait() ;local v118=v117:WaitForChild("Humanoid");local v119=Instance.new("Animation");v119.AnimationId="rbxassetid://"   .. v114 ;local v121=v118:LoadAnimation(v119);v121:Play();local function v122() if (v118.MoveDirection.Magnitude>0) then v121:Stop();end end local v123;v123=game:GetService("RunService").RenderStepped:Connect(v122);end local function v33(v124,v125) if (v124=="Idle") then v0=v125;elseif (v124=="Walk") then v1=v125;elseif (v124=="Run") then v2=v125;elseif (v124=="Jump") then v3=v125;elseif (v124=="Fall") then v4=v125;elseif (v124=="SwimIdle") then v5=v125;elseif (v124=="Swim") then v6=v125;elseif (v124=="Climb") then v7=v125;end end local function v34(v126,v127,v128,v129) v126:AddButton({Title=v127,Description="Change "   .. v128   .. " to "   .. v127 ,Callback=function() v30(v128,v129);v33(v128,v127);end});end local function v35(v130,v131) if (syn and syn.toast_notification) then syn.toast_notification({Type=ToastType.Error,Title=v130,Content=v131});else StarterGui:SetCore("SendNotification",{Title=v130,Text=v131});end end local function v36(v132,v133) v16();local v134=game:GetService("Players");local v135=v134.LocalPlayer;local v136=v135.Character:FindFirstChildOfClass("Humanoid");local v137=v136 and v136:FindFirstChildOfClass("HumanoidDescription") ;if  not v137 then return;end if (v135.Character.Humanoid.RigType~=Enum.HumanoidRigType.R6) then local v181,v182=pcall(function() v136:PlayEmoteAndGetAnimTrackById(v133);end);if  not v181 then v137:AddEmote(v132,v133);v136:PlayEmoteAndGetAnimTrackById(v133);end else v35("r6? lol","you gotta be r15 dude");end end local v37=loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))();local v38=loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))();local v39=loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))();local v40=v37:CreateWindow({Title="Gazer Fe Animation (Solara Support) ",SubTitle="by gazer",TabWidth=160,Size=UDim2.fromOffset(500,400),Acrylic=false,Theme="Darker",MinimizeKey=Enum.KeyCode.G});Idle=v40:AddTab({Title="Idle",Icon="squircle"});Walk=v40:AddTab({Title="Walk",Icon="squircle"});Run=v40:AddTab({Title="Run",Icon="squircle"});Jump=v40:AddTab({Title="Jump",Icon="squircle"});Fall=v40:AddTab({Title="Fall",Icon="squircle"});SwimIdle=v40:AddTab({Title="Swim Idle",Icon="squircle"});Swim=v40:AddTab({Title="Swim",Icon="squircle"});Climb=v40:AddTab({Title="Climb",Icon="squircle"});Special=v40:AddTab({Title="Very Special",Icon="squircle"});Info=v40:AddTab({Title="Misc",Icon="info"});Emote=v40:AddTab({Title="Emotes",Icon="sparkle"});Special:AddParagraph({Title="2016 Anim",Content="This Animation Got 3 Idle Animation So I Put It Here"});Special:AddButton({Title="2016 Anims",Description="Changes Ur Animation To 2016 Anims (Not Permanent)",Callback=function() v31();loadstring(game:HttpGet("https://raw.githubusercontent.com/ltseverydayyou/Nameless-Admin/main/2016%20anims"))();end});local function v41(v138,v139) Emote:AddButton({Title=v138,Description="Special R6 Emote",Callback=function() v32(v139);end});end local function v42(v140,v141,v142) Emote:AddButton({Title=v140,Description="Price = "   .. (v142 or "N/A") ,Callback=function() v32(v141);end});end Info:AddButton({Title="Discord Server",Description="Copies Discord Server Invite Link",Callback=function() setclipboard("https://discord.com/invite/SmFPVYjHYy");end});local v43=Info:AddParagraph({Title="Animation Status",Content="Current Idle Animation = None\nCurrent Walk Animation = None\nCurrent Run Animation = None\nCurrent Jump Animation = None\nCurrent Fall Animation = None\nCurrent Swim Idle Animation = None\nCurrent Swim Animation = None\n Current Climb Animation = None"});Emote:AddParagraph({Title="R6 Emote",Content="Can Be Played On R15"});v41("Dance 1",12521009666);v41("Dance 2",12521169800);v41("Dance 3",12521178362);v41("Cheer",12521021991);v41("Laugh",12521018724);v41("Point",12521007694);v41("Wave",12521004586);v42("Arm Wave",5915773155);v42("Head Banging",5915779725);v42("Face Calisthenics",9830731012);for v143,v144 in pairs(v20.Idle) do v34(Idle,v143,"Idle",v144);end for v145,v146 in pairs(v20.Walk) do v34(Walk,v145,"Walk",v146);end for v147,v148 in pairs(v20.Run) do v34(Run,v147,"Run",v148);end for v149,v150 in pairs(v20.Jump) do v34(Jump,v149,"Jump",v150);end for v151,v152 in pairs(v20.Fall) do v34(Fall,v151,"Fall",v152);end for v153,v154 in pairs(v20.SwimIdle) do v34(SwimIdle,v153,"SwimIdle",v154);end for v155,v156 in pairs(v20.Swim) do v34(Swim,v155,"Swim",v156);end for v157,v158 in pairs(v20.Climb) do v34(Climb,v157,"Climb",v158);end v9.LocalPlayer.CharacterAdded:Connect(function(v159) v13();v14();wait();if v15.Idle then v30("Idle",v15.Idle);end if v15.Walk then v30("Walk",v15.Walk);end if v15.Run then v30("Run",v15.Run);end if v15.Jump then v30("Jump",v15.Jump);end if v15.Fall then v30("Fall",v15.Fall);end if v15.Climb then v30("Climb",v15.Climb);end if v15.Swim then v30("Swim",v15.Swim);end if v15.SwimIdle then v30("SwimIdle",v15.SwimIdle);end end);
+local CurrentIdle = "None"
+local CurrentWalk = "None"
+local CurrentRun = "None"
+local CurrentJump = "None"
+local CurrentFall = "None"
+local CurrentSwimIdle = "None"
+local CurrentSwim = "None"
+local CurrentClimb = "None"
+local HttpService = game:GetService("HttpService")
+
+
+local Players = game:GetService("Players")
+local speaker = Players.LocalPlayer
+    local Char = speaker.Character
+        local Animate = Char.Animate
+
+
+local function Wait1()
+ local player = game.Players.LocalPlayer
+  local character = player.Character or player.CharacterAdded:Wait()
+   local humanoid = character:WaitForChild("Humanoid")
+    while humanoid.Health <= 2 do
+      task.wait(0.2) -- Wait for 0.1 seconds before checking again
+       end
+        end
+        
+        
+
+
+
+local function Wait2()
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+    while humanoid:GetState() == Enum.HumanoidStateType.Dead or 
+          humanoid:GetState() == Enum.HumanoidStateType.Ragdoll do
+        wait(0.1)  -- wait for a short period before checking again
+    end
+end
+
+
+
+
+
+local lastAnimations = {} -- Table to store last used animations
+
+local function StopAnim()
+    local speaker = Players.LocalPlayer
+    local Char = speaker.Character
+    local Hum = Char:FindFirstChildOfClass("Humanoid") or Char:FindFirstChildOfClass("AnimationController")
+
+    -- Stop all playing animation tracks
+    for _, v in next, Hum:GetPlayingAnimationTracks() do
+        v:Stop()
+    end
+    end
+
+local function refresh()
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:WaitForChild("Humanoid")
+
+    humanoid:ChangeState(Enum.HumanoidStateType.Landed)
+end
+
+local function refreshswim()
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:WaitForChild("Humanoid")
+
+    humanoid:ChangeState(Enum.HumanoidStateType.Landed)
+    task.wait(0.1)
+    humanoid:ChangeState(Enum.HumanoidStateType.Swimming)
+end
+
+
+local function refreshclimb()
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:WaitForChild("Humanoid")
+
+    humanoid:ChangeState(Enum.HumanoidStateType.Landed)
+    task.wait(0.1)
+    humanoid:ChangeState(Enum.HumanoidStateType.Climbing)
+end
+
+
+
+
+-- Define the animations table with animation IDs
+local Animations = {
+    Idle = {
+Astronaut = {"891621366", "891633237"},
+Bold = {"16738333868", "16738334710"},
+Borock = {"3293641938", "3293642554"},
+Bubbly = {"910004836", "910009958"},
+Cartoony = {"742637544", "742638445"},
+Confident = {"1069977950", "1069987858"},
+Cowboy = {"1014390418", "1014398616"},
+DrollingZombie = {"3489171152", "3489171152"},
+Elder = {"10921101664", "10921102574"},
+Ghost = {"616006778","616008087"},
+Knight = {"657595757", "657568135"},
+Levitation = {"616006778", "616008087"},
+Mage = {"707742142", "707855907"},
+MrToilet = {"4417977954", "4417978624"},
+Ninja = {"656117400", "656118341"},
+OldSchool = {"10921230744", "10921232093"},
+Patrol = {"1149612882", "1150842221"},
+Pirate = {"750781874", "750782770"},
+Popstar = {"1212900985", "1150842221"},
+Princess = {"941003647", "941013098"},
+R6 = {"12521158637","12521162526"},
+R15Reanimated = {"4211217646", "4211218409"},
+Realistic = {"17172918855", "17173014241"},
+Robot = {"616088211", "616089559"},
+Sneaky = {"1132473842", "1132477671"},
+Stylish = {"616136790", "616138447"},
+StylizedFemale = {"4708191566", "4708192150"},
+Superhero = {"616111295", "616113536"},
+Toy = {"782841498", "782845736"},
+Udzal = {"3303162274", "3303162549"},
+Vampire = {"1083445855", "1083450166"},
+Werewolf = {"1083195517", "1083214717"},
+Zombie = {"616158929", "616160636"},
+    },
+    Walk = {
+The2016Anims = "387947975",
+Astronaut = "891667138",
+Bold = "16738340646",
+Bubbly = "910034870",
+Cartoony = "742640026",
+Confident = "1070017263",
+Cowboy = "1014421541",
+DrollingZombie = "3489173414",
+Elder = "10921111375",
+Ghost = "616013216",
+Knight = "10921127095",
+Levitation = "616013216",
+Mage = "707897309",
+Ninja = "656121766",
+OldSchool = "10921244891",
+Patrol = "1151231493",
+Pirate = "750785693",
+Popstar = "1212980338",
+Princess = "941028902",
+R6 = "12518152696",
+R15Reanim = "4211223236",
+Robot = "616095330",
+Sneaky = "1132510133",
+Stylish = "616146177",
+StylizedFemale = "4708193840",
+Superhero = "6161222876",
+Toy = "782843345",
+Udzal = "3303162967",
+Vampire = "1083473930",
+Werewolf = "1083178339",
+Zombie = "616168032",
+    },
+    Run = {
+The2016Anims = "387947975",
+Astronaut = "10921039308",
+Bold = "16738337225",
+Bubbly = "10921057244",
+Cartoony = "10921076136",
+Confident = "1070001516",
+Cowboy = "1014401683",
+DrollingZombie = "3489173414",
+Elder = "10921104374",
+Ghost = "616013216",
+HeavyRun = "3236836670",
+Knight = "10921121197",
+Levitation = "616010382",
+Mage = "10921148209",
+MrToilet = "4417979645",
+Ninja = "656118852",
+OldSchool = "10921240218",
+Patrol = "1150967949",
+Pirate = "750783738",
+Popstar = "1212980348",
+Princess = "941015281",
+R15Reanim = "4211220381",
+R6 = "12518152696",
+Robot = "10921250460",
+Sneaky = "1132494274",
+Stylish = "10921276116",
+StylizedFemale = "4708192705",
+Superhero = "10921291831",
+Toy = "10921306285",
+Vampire = "10921320299",
+Werewolf = "10921336997",
+Zombie = "616163682",
+    },
+    Jump = {
+    Astronaut = "891627522",
+    Bold = "16738336650",
+    Bubbly = "910016857",
+    Cartoony = "742637942",
+    Confident = "1069984524",
+    Cowboy = "1014394726",
+    Elder = "10921107367",
+    Ghost = "616008936",
+    Knight = "910016857",
+    Levitation = "616008936",
+    Mage = "10921149743",
+    Ninja = "656117878",
+    OldSchool = "10921242013",
+    Patrol = "1148811837",
+    Pirate = "750782230",
+    Popstar = "1212954642",
+    Princess = "941008832",
+    Robot = "616090535",
+    R15Reanim = "4211219390",
+    R6 = "12520880485",
+    Sneaky = "1132489853",
+    Stylish = "616139451",
+    StylizedFemale = "4708188025",
+    Superhero = "616115533",
+    Toy = "10921308158",
+    Vampire = "1083455352",
+    Werewolf = "1083218792",
+},
+    Fall = {
+    Astronaut = "891617961",
+    Bold = "16738333171",
+    Bubbly = "910001910",
+    Cartoony = "742637151",
+    Confident = "1069973677",
+    Cowboy = "1014384571",
+    Elder = "10921105765",
+    Knight = "10921122579",
+    Levitation = "616005863",
+    Mage = "707829716",
+    Ninja = "656115606",
+    OldSchool = "10921241244",
+    Patrol = "1148863382",
+    Pirate = "750780242",
+    Popstar = "1212900995",
+    Princess = "941000007",
+    Robot = "616087089",
+    R15Reanim = "4211216152",
+    R6 = "12520972571",
+    Sneaky = "1132469004",
+    Stylish = "616134815",
+    StylizedFemale = "4708186162",
+    Superhero = "616108001",
+    Toy = "782846423",
+    Vampire = "1083443587",
+    Werewolf = "1083189019",
+},
+    SwimIdle = {
+    Astronaut = "891663592",
+    Bold = "16738339817",
+    Bubbly = "910030921",
+    Cartoony = "10921079380",
+    Confident = "1070012133",
+    CowBoy = "1014411816",
+    Elder = "10921110146",
+    Mage = "707894699",
+    Ninja = "656118341",
+    Patrol = "1151221899",
+    Knight = "10921125935",
+    OldSchool = "10921244018",
+    Levitation = "10921139478",
+    Patrol = "1151221899",
+    Popstar = "1212998578",
+    Princess = "941025398",
+    Pirate = "750785176",
+    R6 = "12518152696",
+    Robot = "10921253767",
+    Sneaky = "1132506407",
+    Stylish = "10921281964",
+    Stylized = "4708190607",
+    SuperHero = "10921297391",
+    Toy = "10921310341",
+    Vampire = "10921325443",
+    Werewolf ="10921341319",
+    
+    
+},
+    Swim = {
+    Astronaut = "891663592",
+    Bubbly = "910028158",
+    Bold = "16738339158",
+    Cartoony = "10921079380",
+    CowBoy = "1014406523",
+    Confident = "1070009914",
+    Elder = "10921108971",
+    Knight = "10921125160",
+    Mage = "707876443",
+    OldSchool = "10921243048",
+    PopStar = "1212998578",
+    Princess = "941018893",
+    Pirate = "750784579",
+    Patrol = "1151204998",
+    R6 = "12518152696",
+    Robot = "10921253142",
+    Levitation = "10921138209",
+    Stylish = "10921281000",
+    SuperHero = "10921295495",
+    Sneaky = "1132500520",
+    Toy = "10921309319",
+    Vampire = "10921324408",
+    Werewolf = "10921340419",
+    Zombie = "616165109",
+    
+},
+   Climb = {
+Astronaut = "10921032124",
+Bold = "16738332169",
+Cartoony = "742636889",
+Confident = "1069946257",
+CowBoy = "1014380606",
+Elder = "845392038",
+Ghost = "616003713",
+Knight = "10921125160",
+Levitation = "10921132092",
+Mage = "707826056",
+Ninja = "656114359",
+OldSchool = "10921229866",
+Patrol = "1148811837",
+Popstar = "1213044953",
+Princess = "940996062",
+R6 = "12520982150",
+R15Reanim = "4211214992",
+Robot = "616086039",
+Sneaky = "1132461372",
+Stylish = "10921271391",
+StylizedFemale = "4708184253",
+SuperHero = "10921286911",
+Toy = "10921300839",
+Vampire = "1083439238",
+WereWolf = "10921329322",
+Zombie = "616156119"
+}}
+
+-- Function to reset idle animation
+local function ResetIdle()
+    local speaker = Players.LocalPlayer
+    local Char = speaker.Character
+    local Hum = Char:FindFirstChildOfClass("Humanoid") or Char:FindFirstChildOfClass("AnimationController")
+
+    -- Stop all playing animation tracks
+    for _, v in next, Hum:GetPlayingAnimationTracks() do
+        v:Stop()
+    end
+
+    -- Disable idle Animation
+    local Animate = Char.Animate
+    Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=0"
+    Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=0"
+end
+
+-- Function to reset walk animation
+local function ResetWalk()
+    local speaker = Players.LocalPlayer
+    local Char = speaker.Character
+    local Hum = Char:FindFirstChildOfClass("Humanoid") or Char:FindFirstChildOfClass("AnimationController")
+
+    -- Stop all playing animation tracks
+    for _, v in next, Hum:GetPlayingAnimationTracks() do
+        v:Stop()
+    end
+
+    -- Disable walk Animation
+    local Animate = Char.Animate
+    Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=0"
+    
+end
+
+-- Function to reset run animation
+
+local function ResetRun()
+    local speaker = Players.LocalPlayer
+    local Char = speaker.Character
+    local Hum = Char:FindFirstChildOfClass("Humanoid") or Char:FindFirstChildOfClass("AnimationController")
+
+    -- Stop all playing animation tracks
+    for _, v in next, Hum:GetPlayingAnimationTracks() do
+        v:Stop()
+    end
+
+    -- Wait for a short duration
+    wait(0.1)
+
+    -- Disable run Animation
+    local Animate = Char.Animate
+    Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=0"
+    
+end
+
+local function ResetJump()
+    local speaker = Players.LocalPlayer
+    local Char = speaker.Character
+    local Hum = Char:FindFirstChildOfClass("Humanoid") or Char:FindFirstChildOfClass("AnimationController")
+
+    -- Stop all playing animation tracks
+    for _, v in next, Hum:GetPlayingAnimationTracks() do
+        v:Stop()
+    end
+
+    -- Wait for a short duration
+    wait(0.1)
+
+    -- Disable jump Animation
+    local Animate = Char.Animate
+    Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=0"
+    
+end
+
+-- Function to reset fall animation
+local function ResetFall()
+    local speaker = Players.LocalPlayer
+    local Char = speaker.Character
+    local Hum = Char:FindFirstChildOfClass("Humanoid") or Char:FindFirstChildOfClass("AnimationController")
+
+    -- Stop all playing animation tracks
+    for _, v in next, Hum:GetPlayingAnimationTracks() do
+        v:Stop()
+    end
+
+    -- Disable fall Animation
+    local Animate = Char.Animate
+    Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=0"
+    
+end
+
+local function ResetSwim()
+    local speaker = Players.LocalPlayer
+    local Char = speaker.Character
+    local Hum = Char:FindFirstChildOfClass("Humanoid") or Char:FindFirstChildOfClass("AnimationController")
+
+    -- Stop all playing animation tracks
+    for _, v in next, Hum:GetPlayingAnimationTracks() do
+        v:Stop()
+    end
+
+    -- Disable swim Animation
+    local Animate = Char.Animate
+    Animate.swim.Swim.AnimationId = "http://www.roblox.com/asset/?id=0"
+    
+end
+
+-- Function to reset swim idle animation
+local function ResetSwimIdle()
+    local speaker = Players.LocalPlayer
+    local Char = speaker.Character
+    local Hum = Char:FindFirstChildOfClass("Humanoid") or Char:FindFirstChildOfClass("AnimationController")
+
+    -- Stop all playing animation tracks
+    for _, v in next, Hum:GetPlayingAnimationTracks() do
+        v:Stop()
+    end
+
+    -- Disable swim idle Animation
+    local Animate = Char.Animate
+    Animate.swimidle.SwimIdle.AnimationId = "http://www.roblox.com/asset/?id=0"
+    
+end
+
+
+local function ResetClimb()
+    local speaker = Players.LocalPlayer
+    local Char = speaker.Character
+    local Hum = Char:FindFirstChildOfClass("Humanoid") or Char:FindFirstChildOfClass("AnimationController")
+
+    -- Stop all playing animation tracks
+    for _, v in next, Hum:GetPlayingAnimationTracks() do
+        v:Stop()
+    end
+
+    -- Disable swim idle Animation
+    local Animate = Char.Animate
+    Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=0"
+    
+end
+
+-- Function to set swim animation based on animation ID
+local function setSwimAnimation(animationId)
+    local speaker = Players.LocalPlayer
+    local Char = speaker.Character
+    local Animate = Char:FindFirstChild("Animate")
+
+    if not Animate then return end
+
+    lastAnimations.Swim = animationId
+    ResetSwim()
+    Animate.swim.Swim.AnimationId = "http://www.roblox.com/asset/?id=" .. animationId
+    refreshswim()
+end
+
+-- Function to set animation based on animation type and ID
+local function setAnimation(animationType, animationId)
+    local speaker = Players.LocalPlayer
+    local Char = speaker.Character
+    local Animate = Char:FindFirstChild("Animate")
+
+    if not Animate then return end
+
+    if animationType == "Idle" then
+        lastAnimations.Idle = animationId
+        
+        ResetIdle()
+        Animate.idle.Animation1.AnimationId = "http://www.roblox.com/asset/?id=" .. animationId[1]
+        Animate.idle.Animation2.AnimationId = "http://www.roblox.com/asset/?id=" .. animationId[2]
+        refresh()
+    elseif animationType == "Walk" then
+        lastAnimations.Walk = animationId
+        ResetWalk()
+        Animate.walk.WalkAnim.AnimationId = "http://www.roblox.com/asset/?id=" .. animationId
+        refresh()
+    elseif animationType == "Run" then
+        lastAnimations.Run = animationId
+        ResetRun()
+        Animate.run.RunAnim.AnimationId = "http://www.roblox.com/asset/?id=" .. animationId
+        refresh()
+    elseif animationType == "Jump" then
+        lastAnimations.Jump = animationId
+        ResetJump()
+        Animate.jump.JumpAnim.AnimationId = "http://www.roblox.com/asset/?id=" .. animationId
+        refresh()
+    elseif animationType == "Fall" then
+        lastAnimations.Fall = animationId
+        ResetFall()
+           Animate.fall.FallAnim.AnimationId = "http://www.roblox.com/asset/?id=" .. animationId
+        refresh()
+    elseif animationType == "Swim" then
+    lastAnimations.Swim = animationId
+    ResetSwim()
+    Animate.swim.Swim.AnimationId = "http://www.roblox.com/asset/?id=" .. animationId
+    refreshswim()
+elseif animationType == "SwimIdle" then
+    lastAnimations.SwimIdle = animationId
+    ResetSwimIdle()
+    Animate.swimidle.SwimIdle.AnimationId = "http://www.roblox.com/asset/?id=" .. animationId
+    refreshswim()
+    elseif animationType == "Climb" then
+    lastAnimations.Climb = animationId
+    ResetClimb()
+    Animate.climb.ClimbAnim.AnimationId = "http://www.roblox.com/asset/?id=" .. animationId
+    refreshclimb()
+end  
+end
+
+local function Reset1Anim()
+ResetIdle()
+ResetWalk()
+ResetRun()
+ResetJump()
+ResetFall()
+end
+
+
+
+
+
+local function PlayR6Emote(animationId)
+StopAnim()
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+    local animation = Instance.new("Animation")
+    animation.AnimationId = "rbxassetid://" .. animationId
+    local animationTrack = humanoid:LoadAnimation(animation)
+    animationTrack:Play()
+    local function onMoved()
+        if humanoid.MoveDirection.Magnitude > 0 then
+            animationTrack:Stop()
+        end
+    end
+    local checkMovement
+    checkMovement = game:GetService("RunService").RenderStepped:Connect(onMoved)
+end
+
+
+
+
+
+local function UpdaLabel(type,name)
+if type == "Idle" then
+        CurrentIdle = name
+    elseif type == "Walk" then
+        CurrentWalk = name
+    elseif type == "Run" then
+        CurrentRun = name
+    elseif type == "Jump" then
+        CurrentJump = name
+    elseif type == "Fall" then
+        CurrentFall = name
+    elseif type == "SwimIdle" then
+        CurrentSwimIdle = name
+    elseif type == "Swim" then
+    CurrentSwim = name
+    elseif type == "Climb" then
+    CurrentClimb = name
+    end
+    end
+
+    
+       local function Buy(gamePassID)
+    local MarketplaceService = game:GetService("MarketplaceService")
+    local success, errorMessage = pcall(function()
+        MarketplaceService:PromptGamePassPurchase(game:GetService("Players").LocalPlayer, gamePassID)
+    end)
+                
+                
+     local function AddEmote(Price, Id)
+Donate:AddButton({
+        Title = Price .. " Robux",
+        Description = "Donate " .. Price .. " Robux",
+        Callback = function()
+    Buy(Id)
+  end })
+  end
+                  
+-- Function to create button in specified tab
+local function createButton(tab, text, animationType, animationId)
+tab:AddButton({
+        Title = text,
+        Description = "Change " .. animationType .. " to " .. text,
+        Callback = function()
+  setAnimation(animationType, animationId)
+  UpdaLabel(animationType, text)
+  end })
+  end
+  
+  
+  
+local function SendNotification(title, text)
+	if syn and syn.toast_notification then
+		syn.toast_notification({
+			Type = ToastType.Error,
+			Title = title,
+			Content = text
+		})
+	else
+		StarterGui:SetCore("SendNotification", {
+			Title = title,
+			Text = text
+		})
+	end
+end
+
+
+local function PlayEmote(name: string, id: IntValue)
+StopAnim()
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+	local Humanoid = LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+	local Description = Humanoid and Humanoid:FindFirstChildOfClass("HumanoidDescription")
+	if not Description then
+		return
+	end
+	if LocalPlayer.Character.Humanoid.RigType ~= Enum.HumanoidRigType.R6 then
+		local succ, err = pcall(function()
+			Humanoid:PlayEmoteAndGetAnimTrackById(id)
+		end)
+		if not succ then
+			Description:AddEmote(name, id)
+			Humanoid:PlayEmoteAndGetAnimTrackById(id)
+		end
+	else
+		SendNotification(
+			"r6? lol",
+			"you gotta be r15 dude"
+		)
+	end
+end
+
+
+
+
+
+-- Create the window and tabs
+local library = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
+local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
+
+local Window = library:CreateWindow({
+    Title = "Gazer Fe Animation (Solara Support) ",
+    SubTitle = "by gazer",
+    TabWidth = 160,
+    Size = UDim2.fromOffset(500, 400),
+    Acrylic = false, 
+    Theme = "Darker",
+    MinimizeKey = Enum.KeyCode.G 
+})
+
+
+
+
+Idle = Window:AddTab({ Title = "Idle", Icon = "circle" })
+Walk = Window:AddTab({ Title = "Walk", Icon = "circle" })
+Run = Window:AddTab({ Title = "Run", Icon = "circle" })
+Jump = Window:AddTab({ Title = "Jump", Icon = "circle" })
+Fall = Window:AddTab({ Title = "Fall", Icon = "circle" })
+SwimIdle = Window:AddTab({ Title = "Swim Idle", Icon = "circle" })
+Swim = Window:AddTab({ Title = "Swim", Icon = "circle" })
+Climb = Window:AddTab({ Title = "Climb", Icon = "circle" })
+Info = Window:AddTab({ Title = "Misc", Icon = "info" })
+Emote = Window:AddTab({ Title = "Emotes", Icon = "sparkle" })
+Donate = Window:AddTab({ Title = "Emotes", Icon = "wallet" })
+
+
+
+
+
+local function AddR6Emote(name, id)
+Emote:AddButton({
+        Title = name,
+        Description = "Special R6 Emote",
+        Callback = function()
+        PlayR6Emote(id)
+    end})
+end
+
+local function AddEmote(name, id, price)
+Emote:AddButton({
+        Title = name,
+        Description = "Price = " .. (price or "N/A"),
+        Callback = function()
+        PlayR6Emote(id)
+    end})
+end
+
+Info:AddButton({
+        Title = "Discord Server",
+        Description = "Copies Discord Server Invite Link",
+        Callback = function()
+setclipboard("https://discord.com/invite/SmFPVYjHYy")
+end})
+local AnimationStatus = Info:AddParagraph({
+        Title = "Animation Status",
+        Content = "Current Idle Animation = None\nCurrent Walk Animation = None\nCurrent Run Animation = None\nCurrent Jump Animation = None\nCurrent Fall Animation = None\nCurrent Swim Idle Animation = None\nCurrent Swim Animation = None\n Current Climb Animation = None"
+})
+
+Emote:AddParagraph({
+        Title = "R6 Emote",
+        Content = "Can Be Played On R15" })
+        
+AddR6Emote("Dance 1", 12521009666)
+AddR6Emote("Dance 2", 12521169800)
+AddR6Emote("Dance 3", 12521178362)
+AddR6Emote("Cheer", 12521021991)
+AddR6Emote("Laugh", 12521018724)
+AddR6Emote("Point", 12521007694)
+AddR6Emote("Wave", 12521004586)
+
+
+
+AddEmote("Arm Wave", 5915773155)
+AddEmote("Head Banging", 5915779725)
+AddEmote("Face Calisthenics", 9830731012)
+
+
+-- Add buttons for each animation in respective tabs
+for name, ids in pairs(Animations.Idle) do
+    createButton(Idle, name, "Idle", ids)
+  
+end
+
+for name, id in pairs(Animations.Walk) do
+    createButton(Walk, name, "Walk", id)
+   
+end
+
+for name, id in pairs(Animations.Run) do
+    createButton(Run, name, "Run", id)
+    
+end
+
+for name, id in pairs(Animations.Jump) do
+    createButton(Jump, name, "Jump", id)
+   
+end
+
+for name, id in pairs(Animations.Fall) do
+    createButton(Fall, name, "Fall", id)
+ 
+end
+
+for name, id in pairs(Animations.SwimIdle) do
+    createButton(SwimIdle, name, "SwimIdle", id)
+
+end
+
+for name, id in pairs(Animations.Swim) do
+    createButton(Swim, name, "Swim", id)
+
+end
+
+for name, id in pairs(Animations.Climb) do
+    createButton(Climb, name, "Climb", id)
+    
+end
+
+
+
+-- Handle character added event
+Players.LocalPlayer.CharacterAdded:Connect(function(character)
+Wait1()
+Wait2()
+wait()
+    if lastAnimations.Idle then
+     
+     setAnimation("Idle", lastAnimations.Idle)
+     
+    end
+    
+    if lastAnimations.Walk then
+    
+        setAnimation("Walk", lastAnimations.Walk)
+        
+        
+    end
+    
+    if lastAnimations.Run then
+    
+        setAnimation("Run", lastAnimations.Run)
+      
+        
+    end
+    
+    if lastAnimations.Jump then
+    
+        setAnimation("Jump", lastAnimations.Jump)
+        
+    end
+    
+    if lastAnimations.Fall then
+    
+        setAnimation("Fall", lastAnimations.Fall)
+        
+    end
+        
+   if lastAnimations.Climb then
+   
+        setAnimation("Climb", lastAnimations.Climb)
+        
+    end
+    
+   if lastAnimations.Swim then
+   
+         setAnimation("Swim", lastAnimations.Swim)
+         
+    end
+         
+   if lastAnimations.SwimIdle then
+   
+         setAnimation("SwimIdle", lastAnimations.SwimIdle)
+        
+    end
+end)
